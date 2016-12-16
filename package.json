@@ -1,0 +1,19 @@
+{
+  "name": "tachyons-to-css",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "end-of-stream": "^1.1.0",
+    "join": "^3.0.0",
+    "join-stream": "0.0.0",
+    "split": "^1.0.0",
+    "through2": "^2.0.3"
+  }
+}
