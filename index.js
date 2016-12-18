@@ -8,83 +8,101 @@ const path = require('path')
 const split = require('split')
 const through2 = require('through2')
 const join = require('join-stream')
-const fstream = fs.createReadStream(path.join(__dirname, 'tachyons.css'), 'utf8')
-
 const eos = require('end-of-stream')
 const iclass = process.argv.slice(2)
 
-if (!iclass || iclass.length === 0) {
-  console.log('usage: tachyons-to-css "h-100 w-100"')
-  process.exit(1)
+/*
+ * Returns a javascript representation from a tachyons string
+ */
+function getJSObjectRules (tachyons, cb) {
+  getCSSRules(tachyons, (err, ruleObj) => {
+      console.log('ruleObj', ruleObj)
+    cb(null,{
+      defaultRules: getRulesJs(ruleObj.defaultRules),
+      nsRules: getRulesJs(ruleObj.nsRules),
+      mRules: getRulesJs(ruleObj.mRules),
+      lRules: getRulesJs(ruleObj.lRules)
+    })
+  })
 }
 
-const atoms = iclass[0].split(' ')
-console.log('atoms', atoms)
+function getCSSRules (tachyons, cb) {
+  const defaultRules = []
+  const atoms = tachyons.split(' ')
+  const nsRules = []
+  const mRules = []
+  const lRules = []
 
-let rules = []
-let rulesns = []
-let rulesm = []
-let rulesl = []
+  const fstream = fs.createReadStream(path.join(__dirname, 'tachyons.css'), 'utf8')
+  fstream.pipe(split()).pipe(extractRules(atoms, defaultRules, nsRules, mRules, lRules))
 
-const log = through2(function (d, enc, next) {
-  console.log(d.toString())
-  next()
-})
+  fstream.on('end', function (err) {
+    console.log('inside end event')
+    if (err) {
+      return cb(err)
+    }
+    cb(null, {
+      defaultRules: defaultRules,
+      nsRules: nsRules,
+      mRules: mRules,
+      lRules: lRules
+    })
+  })
+}
 
-const extractRules = through2(function (d, enc, next) {
-  const self = this
-  const classd = d.toString()
-  const exp = /(\.[^\{]+)\s\{(.+)\}/
-  const m = classd.match(exp)
-  if (m === null) {
-    return next()
-  }
-  var ruleset
+/* Returns a stream that adds the rule to its corresponding array
+ * depending on the atom name
+ */
+const extractRules = function (atoms, defaultRules, nsRules, mRules, lRules) {
+  return through2(function (d, enc, next) {
+    const self = this
+    const classd = d.toString()
+    const exp = /(\.[^\{]+)\s\{(.+)\}/
+    const m = classd.match(exp)
+    if (m === null) {
+      return next()
+    }
+    var ruleset
 
-  const p1 = m[1]
-  const p2 = m[2]
+    const p1 = m[1]
+    const p2 = m[2]
 
     // First part contains the class declaration
     // can be multiple classess '.c1,.c2'
     // Second part contains rules name:value; name:value;
 
     // Check if the current declaration contains any of the classes
-  const classess = p1.split(' ')
-  const declrules = p2.split(';')
-  classess.forEach(function (cl) {
-    const cname = cl.replace('.', '')
-    if (cname.endsWith('-ns')) {
-      ruleset = rulesns
-    } else if (cname.endsWith('-m')) {
-      ruleset = rulesm
-    } else if (cname.endsWith('-l')) {
-      ruleset = rulesl
-    } else {
-      ruleset = rules
-    }
+    const classess = p1.split(' ')
+    const declrules = p2.split(';')
+    classess.forEach(function (cl) {
+      const cname = cl.replace('.', '')
+      if (cname.endsWith('-ns')) {
+        ruleset = nsRules
+      } else if (cname.endsWith('-m')) {
+        ruleset = mRules
+      } else if (cname.endsWith('-l')) {
+        ruleset = lRules
+      } else {
+        ruleset = defaultRules
+      }
 
-    if (atoms.indexOf(cname) >= 0) {
+      if (atoms.indexOf(cname) >= 0) {
      // atom found, save rules
-      declrules.forEach(function (drule) {
-        self.push(drule)
-        ruleset.push(drule)
-        console.log('rule added', drule)
-      })
-    }
-  })
+        declrules.forEach(function (drule) {
+          drule = drule.trim()
+          self.push(drule)
+          ruleset.push(drule)
+        })
+      }
+    })
 
     // We have the rules that apply to this class declaration. continue
-  next(null)
-})
-/* Parse tachyons and extract the rules corresponding to the argument classes */
-const stream = fstream.pipe(split()).on('end', function () {
-  printAllRules()
-}).pipe(extractRules)
+    next(null)
+  })
+}
 
-stream.on('end', function () {
-  console.log('end!')
-})
-function printAllRules () {
+function printAllRules (format) {
+  const printRules = format === 'js' ? printRulesJs : printRules
   console.log('Default')
   printRules(rules)
 
@@ -98,6 +116,35 @@ function printAllRules () {
   printRules(rulesl)
 }
 
+function toJSProperty (rule) {
+
+}
+
+function getRulesJs(rules) {
+    const validRules = rules.filter( (e) => { return e && e.trim().length>0 })
+    const obj = {}
+    validRules.forEach( (rule, ix) => { 
+     const parts = rule.split(': ')
+        const prop = toJSNameFromCSS(parts[0])
+        const val = parts[1]
+        obj[prop] = val
+    })
+    return obj
+}
+
+/* convert the css property name to its js equivalent */
+function toJSNameFromCSS (prop) {
+    // background-size => backgroundSize
+  const parts = prop.split('-').map(function (e, ix) {
+    if (ix > 0) {
+      return e.charAt(0).toUpperCase() + e.slice(1)
+    }
+    return e
+  })
+
+  return parts.join('')
+}
+
 function printRules (rules) {
   console.log('{')
   rules.forEach((rule) => {
@@ -107,3 +154,5 @@ function printRules (rules) {
   })
   console.log('}')
 }
+
+module.exports = {getCSSRules, getJSObjectRules}
