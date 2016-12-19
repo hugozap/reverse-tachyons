@@ -11,21 +11,29 @@ equivalent.
 If you install globally (npm install -g reverse-tachyons)
 then a cli tool will be available:
 
-reverse-tachyons "w-100 h-100"
+```
+reverse-tachyons  "w-100 h-100" --js
+```
 
-output:
+Output
+```
+->Defaults:
+{ height: '100%',
+  width: '100%',
+  backgroundColor: '#000',
+  padding: '0' }
 
-OUTPUT here!!!!
+->Not small:
+{ width: '100%' }
+
+```
+
+# Api
+
+TODO: please see tests.js
+
 # Why?
 
-Tachyons is a great tool. It can be used for prototyping or production websites. However sometimes you need to migrate to other CSS systems like inline styles in React or something like Radium.
-
-For example, if you have this tachyons class
-
-TACHYON class here!!!
-
-Then you get the following
-
-RESULT here!!!
+Tachyons is a great tool. It can be used for prototyping and  production websites. However sometimes you need to migrate to other CSS systems like inline styles in React or something like Radium.
 
 
