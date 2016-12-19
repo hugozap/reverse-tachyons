@@ -4,11 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape ./tests.js"
   },
+  "bin": "./bin/cmd/js",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": {
+   "email": "hugozap@gmail.com",
+   "name" : "Hugo Zapata",
+   "url"  : "http://hugozap.com"   
+  },
+   "repository": {
+      "type": "git",
+      "url": "git://github.com/hugozap/reverse-tachyons.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "end-of-stream": "^1.1.0",
     "get-stdin": "^5.0.1",
