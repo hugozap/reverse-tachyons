@@ -16,8 +16,8 @@ const iclass = process.argv.slice(2)
  */
 function getJSObjectRules (tachyons, cb) {
   getCSSRules(tachyons, (err, ruleObj) => {
-      console.log('ruleObj', ruleObj)
-    cb(null,{
+    console.log('ruleObj', ruleObj)
+    cb(null, {
       defaultRules: getRulesJs(ruleObj.defaultRules),
       nsRules: getRulesJs(ruleObj.nsRules),
       mRules: getRulesJs(ruleObj.mRules),
@@ -120,16 +120,16 @@ function toJSProperty (rule) {
 
 }
 
-function getRulesJs(rules) {
-    const validRules = rules.filter( (e) => { return e && e.trim().length>0 })
-    const obj = {}
-    validRules.forEach( (rule, ix) => { 
-     const parts = rule.split(': ')
-        const prop = toJSNameFromCSS(parts[0])
-        const val = parts[1]
-        obj[prop] = val
-    })
-    return obj
+function getRulesJs (rules) {
+  const validRules = rules.filter((e) => { return e && e.trim().length > 0 })
+  const obj = {}
+  validRules.forEach((rule, ix) => {
+    const parts = rule.split(': ')
+    const prop = toJSNameFromCSS(parts[0])
+    const val = parts[1]
+    obj[prop] = val
+  })
+  return obj
 }
 
 /* convert the css property name to its js equivalent */
@@ -144,7 +144,30 @@ function toJSNameFromCSS (prop) {
 
   return parts.join('')
 }
-
+function getCSSFormat (tachyons, cb) {
+  function formatRule (rules) {
+    let astr = []
+    astr.push('{')
+    const validRules = rules.filter( (e) => { return e.trim().length> 0 })
+    validRules.forEach((rule) => {
+      const parts = rule.split(': ')
+      const prop = parts[0]
+      const val = parts[1]
+      const frule = prop + ': ' + val + ';'
+      astr.push(frule)
+    })
+    astr.push('}')
+    return astr.join('\n')
+  }
+  getCSSRules(tachyons, (err, rules) => {
+    cb(null, {
+      defaultRules: formatRule(rules.defaultRules),
+      nsRules: formatRule(rules.nsRules),
+      mRules: formatRule(rules.mRules),
+      lRules: formatRule(rules.lRules)
+    })
+  })
+}
 function printRules (rules) {
   console.log('{')
   rules.forEach((rule) => {
@@ -155,4 +178,4 @@ function printRules (rules) {
   console.log('}')
 }
 
-module.exports = {getCSSRules, getJSObjectRules}
+module.exports = {getCSSRules, getJSObjectRules, getCSSFormat}
