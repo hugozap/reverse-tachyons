@@ -1,0 +1,5 @@
+* TODO:
+[ ] Add command line bin
+[ ] Complete README
+
+

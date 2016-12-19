@@ -3,20 +3,18 @@
  * usage: tachyons-to-css "class declaration"
  */
 
-const fs = require('fs')
-const path = require('path')
-const split = require('split')
-const through2 = require('through2')
-const join = require('join-stream')
-const eos = require('end-of-stream')
-const iclass = process.argv.slice(2)
-
+var fs = require('fs')
+var path = require('path')
+var split = require('split')
+var through2 = require('through2')
+var join = require('join-stream')
+var eos = require('end-of-stream')
+var util = require('util')
 /*
  * Returns a javascript representation from a tachyons string
  */
 function getJSObjectRules (tachyons, cb) {
   getCSSRules(tachyons, (err, ruleObj) => {
-    console.log('ruleObj', ruleObj)
     cb(null, {
       defaultRules: getRulesJs(ruleObj.defaultRules),
       nsRules: getRulesJs(ruleObj.nsRules),
@@ -28,7 +26,7 @@ function getJSObjectRules (tachyons, cb) {
 
 function getCSSRules (tachyons, cb) {
   const defaultRules = []
-  const atoms = tachyons.split(' ')
+  const atoms = tachyons.trim().split(' ')
   const nsRules = []
   const mRules = []
   const lRules = []
@@ -37,7 +35,6 @@ function getCSSRules (tachyons, cb) {
   fstream.pipe(split()).pipe(extractRules(atoms, defaultRules, nsRules, mRules, lRules))
 
   fstream.on('end', function (err) {
-    console.log('inside end event')
     if (err) {
       return cb(err)
     }
@@ -148,7 +145,7 @@ function getCSSFormat (tachyons, cb) {
   function formatRule (rules) {
     let astr = []
     astr.push('{')
-    const validRules = rules.filter( (e) => { return e.trim().length> 0 })
+    const validRules = rules.filter((e) => { return e.trim().length > 0 })
     validRules.forEach((rule) => {
       const parts = rule.split(': ')
       const prop = parts[0]
@@ -157,7 +154,7 @@ function getCSSFormat (tachyons, cb) {
       astr.push(frule)
     })
     astr.push('}')
-    return astr.join('\n')
+    return astr.join(' ')
   }
   getCSSRules(tachyons, (err, rules) => {
     cb(null, {
@@ -178,4 +175,46 @@ function printRules (rules) {
   console.log('}')
 }
 
-module.exports = {getCSSRules, getJSObjectRules, getCSSFormat}
+function process (tachyons, options, cb) {
+  if (options.js) {
+    var result = []
+    getJSObjectRules(tachyons, function (err, obj) {
+      result.push('->Defaults:')
+      result.push(util.inspect(obj.defaultRules, false, null))
+      if (Object.keys(obj.nsRules).length > 0) {
+        result.push('->Not small:')
+        result.push(util.inspect(obj.nsRules, false, null))
+      }
+      if (Object.keys(obj.mRules).length > 0) {
+        result.push('->Medium:')
+        result.push(util.inspect(obj.mRules, false, null))
+      }
+      if (Object.keys(obj.lRules).length > 0) {
+        result.push('->Large:')
+        result.push(util.inspect(obj.lRules, false, null))
+      }
+      cb(null, result.join('\n'))
+    })
+  } else if (options.radium) {
+    console.log('TODO: Radium format')
+  } else {
+    getCSSFormat(tachyons, function (err, obj) {
+      var result = []
+        result.push(obj.defaultRules)
+      if (obj.nsRules.length > 3) {
+        result.push('--- Not small:')
+        result.push(obj.nsRules)
+      }
+      if (obj.mRules.length > 3) {
+        result.push('---- Medium:')
+        result.push(obj.mRules)
+      }
+      if (obj.lRules.length > 3) {
+        result.push('---- Large:')
+        result.push(obj.lRules)
+      }
+      cb(null, result.join('\n\n'))
+    })
+  }
+}
+module.exports = {process, getCSSRules, getJSObjectRules, getCSSFormat}

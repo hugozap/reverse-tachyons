@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "end-of-stream": "^1.1.0",
+    "get-stdin": "^5.0.1",
     "join": "^3.0.0",
     "join-stream": "0.0.0",
+    "minimist": "^1.2.0",
     "split": "^1.0.0",
     "through2": "^2.0.3"
   }
