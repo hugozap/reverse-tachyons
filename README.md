@@ -3,16 +3,21 @@
 Convert a tachyons class declaration to its CSS (or JavaScript)
 equivalent.
 
-# Usage
+# Install
 
+```
+npm install -g reverse-tachyons
 
-# Command line
+```
+
+# Usage (Command line)
 
 If you install globally (npm install -g reverse-tachyons)
 then a cli tool will be available:
 
 ```
 reverse-tachyons  "w-100 h-100" --js
+
 ```
 
 Output
@@ -27,6 +32,7 @@ Output
 { width: '100%' }
 
 ```
+
 ## Flags
 
 --js Return a JavaScript Object (useful for inline styles in React
