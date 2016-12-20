@@ -27,6 +27,11 @@ Output
 { width: '100%' }
 
 ```
+## Flags
+
+--js Return a JavaScript Object (useful for inline styles in React
+
+If you omit the flag, a CSS formatted declaration will be returned
 
 # Api
 

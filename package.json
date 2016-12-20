@@ -1,6 +1,6 @@
 {
   "name": "tachyons-to-css",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,13 @@
   "bin": "./bin/cmd/js",
   "keywords": [],
   "author": {
-   "email": "hugozap@gmail.com",
-   "name" : "Hugo Zapata",
-   "url"  : "http://hugozap.com"   
+    "email": "hugozap@gmail.com",
+    "name": "Hugo Zapata",
+    "url": "http://hugozap.com"
   },
-   "repository": {
-      "type": "git",
-      "url": "git://github.com/hugozap/reverse-tachyons.git"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hugozap/reverse-tachyons.git"
   },
   "license": "MIT",
   "dependencies": {
