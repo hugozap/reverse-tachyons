@@ -6,7 +6,7 @@
   "scripts": {
     "test": "tape ./tests.js"
   },
-  "bin": "./bin/cmd/js",
+  "bin": "./bin/cmd.js",
   "keywords": [],
   "author": {
     "email": "hugozap@gmail.com",
