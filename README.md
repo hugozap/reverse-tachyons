@@ -15,7 +15,7 @@ npm install -g reverse-tachyons
 From your terminal type:
 
 ```
-reverse-tachyons  "w-100 h-100" --js
+reverse-tachyons  "w-100 h-100 bg-black pa0" --js
 
 ```
 
