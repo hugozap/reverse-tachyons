@@ -12,8 +12,7 @@ npm install -g reverse-tachyons
 
 # Usage (Command line)
 
-If you install globally (npm install -g reverse-tachyons)
-then a cli tool will be available:
+From your terminal type:
 
 ```
 reverse-tachyons  "w-100 h-100" --js
