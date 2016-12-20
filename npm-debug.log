@@ -1,0 +1,121 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/hugo/.nvm/versions/node/v6.7.0/bin/node',
+1 verbose cli   '/Users/hugo/.nvm/versions/node/v6.7.0/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.3
+3 info using node@v6.7.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/hugo/WorkingSpace/temp/tachyons-to-css',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/hugo/.npm/reverse-tachyons/1.1.5/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/hugo/.npm correctMkdir not in flight; initializing
+10 info lifecycle reverse-tachyons@1.1.5~prepublish: reverse-tachyons@1.1.5
+11 silly lifecycle reverse-tachyons@1.1.5~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/hugo/.npm/reverse-tachyons/1.1.5/package.tgz',
+12 verbose tar pack   '/Users/hugo/WorkingSpace/temp/tachyons-to-css' ]
+13 verbose tarball /Users/hugo/.npm/reverse-tachyons/1.1.5/package.tgz
+14 verbose folder /Users/hugo/WorkingSpace/temp/tachyons-to-css
+15 verbose addLocalTarball adding from inside cache /Users/hugo/.npm/reverse-tachyons/1.1.5/package.tgz
+16 verbose correctMkdir /Users/hugo/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd reverse-tachyons@1.1.5
+18 verbose afterAdd /Users/hugo/.npm/reverse-tachyons/1.1.5/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/hugo/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/hugo/.npm/reverse-tachyons/1.1.5/package/package.json written
+21 silly publish { name: 'reverse-tachyons',
+21 silly publish   version: '1.1.5',
+21 silly publish   description: 'Convert a tachyons class declaration to its CSS (or JavaScript) equivalent.',
+21 silly publish   main: 'index.js',
+21 silly publish   scripts: { test: 'tape ./tests.js' },
+21 silly publish   bin: { 'reverse-tachyons': './bin/cmd.js' },
+21 silly publish   keywords: [],
+21 silly publish   author:
+21 silly publish    { name: 'Hugo Zapata',
+21 silly publish      email: 'hugozap@gmail.com',
+21 silly publish      url: 'http://hugozap.com' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git://github.com/hugozap/reverse-tachyons.git' },
+21 silly publish   license: 'MIT',
+21 silly publish   dependencies:
+21 silly publish    { 'end-of-stream': '^1.1.0',
+21 silly publish      'get-stdin': '^5.0.1',
+21 silly publish      join: '^3.0.0',
+21 silly publish      'join-stream': '0.0.0',
+21 silly publish      minimist: '^1.2.0',
+21 silly publish      split: '^1.0.0',
+21 silly publish      through2: '^2.0.3' },
+21 silly publish   readme: '# Reverse Tachyons\n\nConvert a tachyons class declaration to its CSS (or JavaScript)\nequivalent.\n\n# Install\n\n```\nnpm install -g reverse-tachyons\n\n```\n\n# Usage (Command line)\n\nFrom your terminal type:\n\n```\nreverse-tachyons  "w-100 h-100 w-100-ns bg-black pa0" --js\n\n```\n\nOutput\n```\n->Defaults:\n{ height: \'100%\',\n  width: \'100%\',\n  backgroundColor: \'#000\',\n  padding: \'0\' }\n\n->Not small:\n{ width: \'100%\' }\n\n```\n\n## Flags\n\n--js Return a JavaScript Object (useful for inline styles in React\n\nIf you omit the flag, a CSS formatted declaration will be returned\n\n# Api\n\nTODO: please see tests.js\n\n# Why?\n\nTachyons is a great tool. It can be used for prototyping and  production websites. However sometimes you need to migrate to other CSS systems like inline styles in React or something like Radium.\n\n\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: 'a884f993833e68c335ab6859b31f808880659c04',
+21 silly publish   bugs: { url: 'https://github.com/hugozap/reverse-tachyons/issues' },
+21 silly publish   homepage: 'https://github.com/hugozap/reverse-tachyons#readme',
+21 silly publish   _id: 'reverse-tachyons@1.1.5',
+21 silly publish   _shasum: 'a5751611d6f7c585b6604b2f4817474727909b38',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name reverse-tachyons
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'reverse-tachyons',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'reverse-tachyons',
+26 silly mapToRegistry   name: 'reverse-tachyons',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/reverse-tachyons
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/hugo/.npm/reverse-tachyons/1.1.5/package.tgz
+30 verbose request uri https://registry.npmjs.org/reverse-tachyons
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 7:24:58 PM
+33 verbose request using bearer token for auth
+34 verbose request id 6cba2d8c0c8c14b7
+35 http request PUT https://registry.npmjs.org/reverse-tachyons
+36 http 403 https://registry.npmjs.org/reverse-tachyons
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Tue, 20 Dec 2016 00:25:00 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-atl6243-ATL',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1482193499.376429,VS0,VE767',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/hugo/.npm/registry.npmjs.org/reverse-tachyons on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 1.1.5." : reverse-tachyons
+40 verbose stack     at makeError (/Users/hugo/.nvm/versions/node/v6.7.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/Users/hugo/.nvm/versions/node/v6.7.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/Users/hugo/.nvm/versions/node/v6.7.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/Users/hugo/.nvm/versions/node/v6.7.0/lib/node_modules/npm/node_modules/request/request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/Users/hugo/.nvm/versions/node/v6.7.0/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/Users/hugo/.nvm/versions/node/v6.7.0/lib/node_modules/npm/node_modules/request/request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid reverse-tachyons
+43 verbose cwd /Users/hugo/WorkingSpace/temp/tachyons-to-css
+44 error Darwin 16.0.0
+45 error argv "/Users/hugo/.nvm/versions/node/v6.7.0/bin/node" "/Users/hugo/.nvm/versions/node/v6.7.0/bin/npm" "publish"
+46 error node v6.7.0
+47 error npm  v3.10.3
+48 error code E403
+49 error "You cannot publish over the previously published version 1.1.5." : reverse-tachyons
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
