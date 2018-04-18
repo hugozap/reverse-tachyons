@@ -10,7 +10,6 @@ if (process.version.match(/v(\d+)\./)[1] < 4) {
   var argv = minimist(process.argv.slice(2), {
     boolean: [
       'js',
-      'radium',
       'css',
       'help'
     ]
@@ -26,7 +25,6 @@ if (process.version.match(/v(\d+)\./)[1] < 4) {
          reverse-tachyons <flags> [tachyons string]
        Flags:
          js : output JS definitions
-         radium: output JS (Radium compatible) definitions
          css: output CSS definitions
       `
       )

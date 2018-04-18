@@ -31,7 +31,7 @@ function getCSSRules (tachyons, cb) {
   const mRules = []
   const lRules = []
 
-  const fstream = fs.createReadStream(path.join(__dirname, 'tachyons.css'), 'utf8')
+  const fstream = fs.createReadStream(path.join(__dirname, 'node_modules/tachyons/css/tachyons.css'), 'utf8')
   fstream.pipe(split()).pipe(extractRules(atoms, defaultRules, nsRules, mRules, lRules))
 
   fstream.on('end', function (err) {

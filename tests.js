@@ -11,10 +11,7 @@ test('basic', function (t) {
 test('CSS declaration', function (t) {
     t.plan(1)
     r.getCSSFormat('w-100 h-100 w-50-ns w-10-m w-20-l', (err, ob) => { 
-        const expectedDefault = `{
-height: 100%;
-width: 100%;
-}`
+        const expectedDefault = `{ height: 100%; width: 100%; }`
         t.equals( ob.defaultRules, expectedDefault)
     })
 })

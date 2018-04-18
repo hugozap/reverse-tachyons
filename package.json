@@ -25,6 +25,10 @@
     "join-stream": "0.0.0",
     "minimist": "^1.2.0",
     "split": "^1.0.0",
+    "tachyons": "^4.9.1",
     "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "tape": "^4.9.0"
   }
 }
