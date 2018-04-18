@@ -1,7 +1,11 @@
 # Reverse Tachyons
 
-Convert a tachyons class declaration to its CSS (or JavaScript)
+Convert a tachyons string to its CSS (or JavaScript)
 equivalent.
+
+Useful if you like tachyons conventions but need the 
+actual CSS instead.
+
 
 # Install
 
@@ -38,12 +42,5 @@ Output
 
 If you omit the flag, a CSS formatted declaration will be returned
 
-# Api
-
-TODO: please see tests.js
-
-# Why?
-
-Tachyons is a great tool. It can be used for prototyping and  production websites. However sometimes you need to migrate to other CSS systems like inline styles in React or something like Radium.
 
 
