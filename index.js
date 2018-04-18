@@ -10,6 +10,9 @@ var through2 = require('through2')
 var join = require('join-stream')
 var eos = require('end-of-stream')
 var util = require('util')
+const intoStream = require('into-stream');
+
+const tachyonsStr = fs.readFileSync(path.join(__dirname, 'node_modules/tachyons/css/tachyons.css'), 'utf8');
 /*
  * Returns a javascript representation from a tachyons string
  */
@@ -31,7 +34,7 @@ function getCSSRules (tachyons, cb) {
   const mRules = []
   const lRules = []
 
-  const fstream = fs.createReadStream(path.join(__dirname, 'node_modules/tachyons/css/tachyons.css'), 'utf8')
+  const fstream = intoStream(tachyonsStr)
   fstream.pipe(split()).pipe(extractRules(atoms, defaultRules, nsRules, mRules, lRules))
 
   fstream.on('end', function (err) {
