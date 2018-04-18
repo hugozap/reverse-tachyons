@@ -12,7 +12,7 @@ var eos = require('end-of-stream')
 var util = require('util')
 const intoStream = require('into-stream');
 
-const tachyonsStr = fs.readFileSync(path.join(__dirname, 'node_modules/tachyons/css/tachyons.css'), 'utf8');
+const tachyonsStr = fs.readFileSync(__dirname + '/tachyons.css', 'utf8');
 /*
  * Returns a javascript representation from a tachyons string
  */
