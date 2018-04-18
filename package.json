@@ -2,9 +2,12 @@
   "name": "reverse-tachyons",
   "version": "1.1.11",
   "description": "",
-  "main": "index.js",
+  "main": "./index.js",
+  "browser": "./browser/reversetachyons.js",
   "scripts": {
-    "test": "tape ./tests.js"
+    "test": "tape ./tests.js",
+    "build-browser": "browserify reverse-tachyons.js -t brfs > ./browser/reversetachyons.js",
+    "prepublishOnly": "yarn build-browser"
   },
   "bin": "./bin/cmd.js",
   "keywords": [],
@@ -27,9 +30,12 @@
     "minimist": "^1.2.0",
     "split": "^1.0.0",
     "tachyons": "^4.9.1",
-    "through2": "^2.0.3"
+    "through2": "^2.0.3",
+    "util": "^0.10.3"
   },
   "devDependencies": {
+    "brfs": "^1.6.1",
+    "browserify": "^16.2.0",
     "tape": "^4.9.0"
   }
 }
